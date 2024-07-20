@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import imgProfile from "../../img/Profile.jpg";
 import { useNavigate } from "react-router-dom";
+import Axios from "axios";
 
 function Main() {
+  const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
   const handleLoginClick = () => {
     navigate("/login");
   };
-
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const res = await Axios.get("http://localhost:3001/blogs");
+        setBlogs(res.data);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      }
+    };
+    fetchBlogs();
+  }, []);
   return (
     <div>
       <div className="navbar bg-base-100 ">
@@ -146,51 +158,50 @@ function Main() {
             <div className="w-128 diff-resizer"></div>
           </div>
           <div className="mt-24 flex justify-center">
-            <div className="card card-compact bg-base-100 w-96 shadow-xl mr-14">
-              <figure>
-                <img
-                  src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                  alt="Shoes"
-                />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">Shoes!</h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-                <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Buy Now</button>
+            {blogs.map((blog) => (
+              <div
+                className="card card-compact bg-base-100 w-96 shadow-xl mr-14"
+                key={blog._id}
+              >
+                <figure>
+                  {blog.img && (
+                    <img
+                      src={`http://localhost:3001/image/${blog._id}`}
+                      alt={blog.topic}
+                      className="object-cover h-48 w-96"
+                    />
+                  )}
+                </figure>
+                <div className="card-body">
+                  <h2 className="card-title">{blog.topic}</h2>
+                  <p>{blog.story}</p>
+                  <div className="card-actions justify-end">
+                    <button
+                      className="btn btn-primary"
+                      onClick={() =>
+                        document.getElementById(`${blog._id}`).showModal()
+                      }
+                    >
+                      More
+                    </button>
+                    <dialog
+                      id={blog._id}
+                      className="modal modal-bottom sm:modal-middle"
+                    >
+                      <div className="modal-box">
+                        <h3 className="font-bold text-lg">Content</h3>
+                        <p className="py-4">{blog.detail}</p>
+                        <div className="modal-action">
+                          <form method="dialog">
+                            <button className="btn">Close</button>
+                          </form>
+                        </div>
+                      </div>
+                    </dialog>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="card card-compact bg-base-100 w-96 shadow-xl mr-14">
-              <figure>
-                <img
-                  src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                  alt="Shoes"
-                />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">Shoes!</h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-                <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Buy Now</button>
-                </div>
-              </div>
-            </div>
-            <div className="card card-compact bg-base-100 w-96 shadow-xl mr-14">
-              <figure>
-                <img
-                  src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                  alt="Shoes"
-                />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">Shoes!</h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-                <div className="card-actions justify-end">
-                  <button className="btn btn-primary">Buy Now</button>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

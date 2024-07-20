@@ -5,6 +5,11 @@ function AdminPage() {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [IsAdmin, setIsAdmin] = useState();
+  const [file, setFile] = useState(null);
+  const [topic, setTopic] = useState("");
+  const [story, setStory] = useState("");
+  const [date, setDate] = useState("");
+  const [detail, setDetail] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
     const fetchCreate = async () => {
@@ -13,12 +18,38 @@ function AdminPage() {
           username: username,
           password: password,
         }).then((result) => {
-          console.log(result);
-          console.log(username, password);
+          // console.log(result);
+          // console.log(username, password);
           if (result) {
             console.log("welcome to Admin");
             setIsAdmin(true);
           }
+        });
+      } catch (error) {
+        console.error("Error occurred:", error);
+      }
+    };
+    fetchCreate();
+  };
+  const handleSubmitBlog = (e) => {
+    e.preventDefault();
+    const fetchCreate = async () => {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("topic", topic);
+      formData.append("story", story);
+      formData.append("date", date);
+      formData.append("detail", detail);
+
+      try {
+        await Axios.post("http://localhost:3001/blogs", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }).then(() => {
+          console.log("Render complete");
+          // console.log(result);
+          // console.log(topic, story, date, detail);
         });
       } catch (error) {
         console.error("Error occurred:", error);
@@ -91,7 +122,7 @@ function AdminPage() {
         </div>
       ) : (
         <div className="flex justify-center mt-24">
-          <form action="" method="post">
+          <form onSubmit={handleSubmitBlog}>
             <div className="text-4xl font-bold pb-5">Post Form</div>
             <div className="section">
               <label htmlFor="topic" className="font-bold">
@@ -101,6 +132,7 @@ function AdminPage() {
                 type="text"
                 name="topic"
                 id="topic"
+                onChange={(e) => setTopic(e.target.value)}
                 className="input input-bordered w-full max-w-xs mt-2 mb-4"
               />
             </div>
@@ -109,8 +141,9 @@ function AdminPage() {
                 Story
               </label>
               <textarea
-                name="detail"
-                id="datail"
+                name="story"
+                id="story"
+                onChange={(e) => setStory(e.target.value)}
                 className="input input-bordered w-full max-w-xs mt-2 mb-4"
               ></textarea>
             </div>
@@ -122,6 +155,7 @@ function AdminPage() {
                 type="date"
                 name="date"
                 id="date"
+                onChange={(e) => setDate(e.target.value)}
                 className="input input-bordered w-full max-w-xs mt-2 mb-4"
               />
             </div>
@@ -133,6 +167,7 @@ function AdminPage() {
                 id="file-upload"
                 name="file-upload"
                 type="file"
+                onChange={(e) => setFile(e.target.files[0])}
                 className="mt-2 ml-2 mb-4"
               />
             </div>
@@ -143,6 +178,7 @@ function AdminPage() {
               <textarea
                 name="detail"
                 id="datail"
+                onChange={(e) => setDetail(e.target.value)}
                 className="input input-bordered w-full max-w-xs mt-2 mb-4"
               ></textarea>
             </div>
