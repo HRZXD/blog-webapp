@@ -86,8 +86,8 @@ app.get('/image/:id', async (req, res) => {
     }
 });
 
-app.listen(3001, () => {
-    console.log("Server listening on 3001");
+app.listen(4000, () => {
+    console.log("Server listening on 4000");
 })
 
 
