@@ -16,12 +16,16 @@ const upload = multer({ storage: storage });
 mongoose.set('strictQuery', false);
 
 mongoose.connect('mongodb+srv://adminhrz:PhtfuMrarlLHv4Qf@cluster0.ewbiuim.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0' ,{
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true
 }).then(()=>{
     console.log("mongodb connected");
 }).catch(() => {
     console.error;
+})
+app.get("/", (req, res) => {
+  res.send("Default Route Works!");
 })
 app.post('/admin' , async (req, res) => {
     const {username, password} = req.body;
