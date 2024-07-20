@@ -14,7 +14,7 @@ function AdminPage() {
     e.preventDefault();
     const fetchCreate = async () => {
       try {
-        await Axios.post("http://localhost:3001/admin", {
+        await Axios.post("https://blog-webapp-seven.vercel.app/admin", {
           username: username,
           password: password,
         }).then((result) => {
@@ -42,7 +42,7 @@ function AdminPage() {
       formData.append("detail", detail);
 
       try {
-        await Axios.post("http://localhost:3001/blogs", formData, {
+        await Axios.post("https://blog-webapp-seven.vercel.app/blogs", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
