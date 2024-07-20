@@ -12,7 +12,7 @@ function Main() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await Axios.get("https://blog-webapp-seven.vercel.app/blogs");
+        const res = await Axios.get("https://blog-api-ten-delta.vercel.app/blogs");
         setBlogs(res.data);
       } catch (error) {
         console.error("Error fetching blogs:", error);
