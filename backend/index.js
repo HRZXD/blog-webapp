@@ -13,7 +13,7 @@ const Blog = require('./model/blogModels')
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
-
+mongoose.set('strictQuery', false);
 
 mongoose.connect('mongodb+srv://adminhrz:PhtfuMrarlLHv4Qf@cluster0.ewbiuim.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0' ,{
     useNewUrlParser: true,
