@@ -127,18 +127,28 @@ function Main() {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] w-72 p-4 shadow"
             >
               <li>
-                <a className="justify-between text-base" href="https://www.instagram.com/_hr1pct/" target="_blank">
+                <a
+                  className="justify-between text-base"
+                  href="https://www.instagram.com/_hr1pct/"
+                  target="_blank"
+                >
                   Instagram
                   <span className="badge">New</span>
                 </a>
               </li>
               <li>
-                <a className="text-base" href="https://github.com/HRZXD" target="_blank">Github</a>
+                <a
+                  className="text-base"
+                  href="https://github.com/HRZXD"
+                  target="_blank"
+                >
+                  Github
+                </a>
               </li>
             </ul>
           </div>
-          <div className="text-2xl font-bold mt-4">
-            I&apos;m Haris, <q>I hope you enjoy with my blog</q>
+          <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mt-4">
+            I&apos;m Haris, <q>I hope you enjoy my blog</q>
           </div>
         </div>
       </div>
@@ -146,21 +156,21 @@ function Main() {
         <div className="contanier mb-36">
           <div className="diff aspect-[16/9] h-44">
             <div className="diff-item-1">
-              <div className="bg-primary text-primary-content grid place-content-center text-9xl font-black">
+              <div className="bg-primary text-primary-content grid place-content-center text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black">
                 BLOGS
               </div>
             </div>
             <div className="diff-item-2">
-              <div className="bg-white grid place-content-center text-9xl font-black">
+              <div className="bg-white grid place-content-center text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black">
                 BLOGS
               </div>
             </div>
             <div className="w-128 diff-resizer"></div>
           </div>
-          <div className="mt-24 flex justify-center">
+          <div className="mt-24 flex flex-wrap justify-center gap-4">
             {blogs.map((blog) => (
               <div
-                className="card card-compact bg-base-100 w-96 shadow-xl mr-14"
+                className="card card-compact bg-base-100 w-80 shadow-xl mb-4"
                 key={blog._id}
               >
                 <figure>
@@ -168,7 +178,7 @@ function Main() {
                     <img
                       src={`${import.meta.env.VITE_KEY}/image/${blog._id}`}
                       alt={blog.topic}
-                      className="object-cover h-48 w-96"
+                      className="object-cover h-48 w-80"
                     />
                   )}
                 </figure>
@@ -184,13 +194,11 @@ function Main() {
                     >
                       More
                     </button>
-                    <dialog
-                      id={blog._id}
-                      className="modal modal-bottom sm:modal-middle"
-                    >
-                      <div className="modal-box">
+                    <dialog id={blog._id} className="modal">
+                      <div className="modal-box w-11/12 max-w-5xl">
                         <h3 className="font-bold text-lg">Content</h3>
-                        <p className="py-4">{blog.detail}</p>
+                        <p className="pt-2 text-base">Time: {blog.date}</p>
+                        <p className="pt-2 text-base">{blog.detail}</p>
                         <div className="modal-action">
                           <form method="dialog">
                             <button className="btn">Close</button>
@@ -210,7 +218,11 @@ function Main() {
           <nav>
             <div className="text-base font-bold mb-2">My Socials</div>
             <div className="grid grid-flow-col gap-4">
-              <a className="mr-9 text-neutral-800 dark:text-neutral-200 btn btn-square" href="https://www.instagram.com/_hr1pct/" target="_blank">
+              <a
+                className="mr-9 text-neutral-800 dark:text-neutral-200 btn btn-square"
+                href="https://www.instagram.com/_hr1pct/"
+                target="_blank"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-10 w-10"
@@ -220,7 +232,11 @@ function Main() {
                   <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                 </svg>
               </a>
-              <a className="text-neutral-800 dark:text-neutral-200 btn btn-circle" href="https://github.com/HRZXD" target="_blank">
+              <a
+                className="text-neutral-800 dark:text-neutral-200 btn btn-circle"
+                href="https://github.com/HRZXD"
+                target="_blank"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-10 w-10"
