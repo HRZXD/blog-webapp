@@ -14,7 +14,7 @@ function AdminPage() {
     e.preventDefault();
     const fetchCreate = async () => {
       try {
-        await Axios.post("https://blog-api-ten-delta.vercel.app/admin", {
+        await Axios.post(`${import.meta.env.VITE_KEY}/admin`, {
           username: username,
           password: password,
         }).then((result) => {
@@ -42,7 +42,7 @@ function AdminPage() {
       formData.append("detail", detail);
 
       try {
-        await Axios.post("https://blog-api-ten-delta.vercel.app/blogs", formData, {
+        await Axios.post(`${import.meta.env.VITE_KEY}/blogs`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
