@@ -1,4 +1,4 @@
-#Personal Blog Web App
+## Personal Blog Web App
 
 This project is a personal blog web application built with a modern and efficient tech stack:
 
